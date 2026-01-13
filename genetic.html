@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Genetic Optimization Framework Project</title>
+    <link rel="stylesheet" href="genetic.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="scripts.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+    <video class="back-vid" autoplay loop muted playsinline>
+        <source src="../videos/new-galaxy.mp4" type="video/mp4">
+        <source src="../videos/galaxy.webm" type="video/webm">
+        Your browser does not support the video tag.
+    </video>    
+    <div class="project-container">
+    <a href="../index.html" class="back-btn" title="Back to Home">&#8592; Back</a>
+    <h1 class="project-title">
+        Genetic Optimization Framework with Diverse Operators in Python
+    </h1>    
+    <div class="project-section">
+            <div class="project-details">
+                <ul>
+                    <li>Built a Python-based Genetic Algorithm that can solve both function optimization and pathfinding (like TSP) problems.</li>
+                    <li>Integrated different crossover and mutation methods (one-point, order, Gaussian, and swap) that can be swapped and tested.</li>
+                </ul>
+            </div>
+            <div class="project-image">
+                <!-- clickable image (opens preview modal in same tab) -->
+                <img class="clickable-img" src="../images/genetic-p1.png" alt="Genetic Algorithm Visualization">
+            </div>
+        </div>
+        
+        <div class="project-section reverse">
+            <div class="project-details">
+                <ul>
+                    <li>Ran tests on benchmark problems (Sphere, Rosenbrock, Himmelblau, TSP) to compare how each operator performs.</li>
+                    <li>Visualized algorithm behavior using matplotlib to analyze fitness trends, convergence, and computation time.</li>
+                </ul>
+            </div>
+            <div class="project-image">
+                <!-- second clickable image -->
+                <img class="clickable-img" src="../images/genetic-p3.png" alt="Genetic Algorithm Visualization">
+            </div>
+        </div>
+    </div>
+
+    <!-- Image preview modal (stays in same tab) -->
+    <div id="imgModal" class="img-modal" aria-hidden="true" role="dialog" aria-label="Image preview">
+        <button class="img-modal-close" aria-label="Close preview">&times;</button>
+        <img class="img-modal-content" src="" alt="">
+    </div>
+
+    <div class="bottom-video-wrapper">
+        <video class="bottom-video" controls>
+            <source src="../videos/genetic-video.mov" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <a href="https://github.com/" target="_blank" class="github-fab" title="GitHub">
+    <i class="fab fa-github"></i></a>
+
+    <script>
+        // simple modal preview that opens image in the same tab
+        (function() {
+            const modal = document.getElementById('imgModal');
+            const modalImg = modal.querySelector('.img-modal-content');
+            const closeBtn = modal.querySelector('.img-modal-close');
+
+            function openModal(src, alt) {
+                modalImg.src = src;
+                modalImg.alt = alt || '';
+                modal.setAttribute('aria-hidden', 'false');
+                modal.classList.add('open');
+                // trap focus on close button for simple accessibility
+                closeBtn.focus();
+                document.body.style.overflow = 'hidden';
+            }
+            function closeModal() {
+                modal.classList.remove('open');
+                modal.setAttribute('aria-hidden', 'true');
+                modalImg.src = '';
+                document.body.style.overflow = '';
+            }
+
+            document.querySelectorAll('.clickable-img').forEach(img => {
+                img.setAttribute('tabindex', '0');
+                img.addEventListener('click', () => openModal(img.src, img.alt));
+                img.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openModal(img.src, img.alt);
+                    }
+                });
+            });
+
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                // close when clicking outside the image
+                if (e.target === modal) closeModal();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+            });
+        })();
+    </script>
+</body>
+</html>

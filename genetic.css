@@ -1,0 +1,288 @@
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #e7e7e7;
+    min-height: 100vh;
+    background: transparent;
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+.back-vid {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.project-container {
+    max-width: 900px;
+    margin: 4rem auto 2rem auto;
+    padding: 2.5rem 2rem;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+
+.back-btn {
+    display: inline-block;
+    color: #b066ff;
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    transition: color 0.2s;
+    cursor: pointer;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+.back-btn:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.project-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #ffffff, #b066ff 80%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.03em;
+    filter: drop-shadow(0 0 15px rgba(176, 102, 255, 0.2));
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+@keyframes title-glow {
+    0% { text-shadow: 0 0 10px rgba(255,255,255,0.6), 0 0 20px rgba(0,198,251,0.4); background-position: 0% 50%; }
+    50% { text-shadow: 0 0 26px rgba(255,255,255,0.95), 0 0 40px rgba(0,198,251,0.8); background-position: 100% 50%; }
+    100% { text-shadow: 0 0 10px rgba(255,255,255,0.6), 0 0 20px rgba(0,198,251,0.4); background-position: 0% 50%; }
+}
+
+/* Increase bullet text size for readability */
+.project-details li {
+    font-size: 1.12rem;
+    line-height: 1.6;
+    transition: transform 0.18s cubic-bezier(.4,2,.6,1), background 0.18s;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 6px 8px;
+}
+
+/* Hover / focus accessibility scale */
+.project-details li:hover,
+.project-details li:focus {
+    transform: scale(1.13);
+    background: rgba(64,224,208,0.12);
+    outline: none;
+}
+
+/* Clickable image styling */
+.clickable-img {
+    cursor: zoom-in;
+    border-radius: 12px;
+    max-width: 100%;
+    height: auto;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+}
+.clickable-img:hover,
+.clickable-img:focus {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.6);
+}
+
+/* Modal preview styles */
+.img-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.85);
+    z-index: 2000;
+    padding: 24px;
+}
+.img-modal.open {
+    display: flex;
+}
+.img-modal-content {
+    max-width: 92vw;
+    max-height: 88vh;
+    width: auto;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 18px 60px rgba(0,0,0,0.7);
+    object-fit: contain;
+}
+
+/* Close button */
+.img-modal-close {
+    position: absolute;
+    right: 28px;
+    top: 24px;
+    background: rgba(255,255,255,0.06);
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    line-height: 1;
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 2010;
+    transition: background 0.15s, transform 0.12s;
+}
+.img-modal-close:hover,
+.img-modal-close:focus {
+    background: rgba(255,255,255,0.12);
+    transform: scale(1.04);
+    outline: none;
+}
+
+/* Keep GitHub in bottom-right (already handled but ensure on top) */
+.github-fab { z-index: 2100; }
+
+.github-logo img {
+    width: 2rem;
+    height: 2rem;
+    vertical-align: middle;
+    transition: filter 0.2s;
+    filter: grayscale(1) brightness(2);
+}
+.github-logo:hover img {
+    filter: none;
+}
+
+.project-section {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    margin-bottom: 2rem;
+    background: transparent;
+}
+
+.project-section.reverse {
+    flex-direction: row-reverse;
+}
+
+.project-details {
+    flex: 1;
+    min-width: 220px;
+}
+
+.project-details ul {
+    margin: 0 0 1rem 1.2rem;
+    padding: 0;
+    font-size: 1.1rem;
+    color: #e7e7e7;
+}
+
+.project-details li {
+    margin-bottom: 0.7rem;
+    line-height: 1.6;
+}
+
+.github-link {
+    color: #b066ff;
+    text-decoration: underline;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+.github-link:hover {
+    color: #fff;
+}
+
+.project-image img {
+    width: 320px;
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(176, 102, 255, 0.15);
+    background: #222;
+    object-fit: cover;
+    transition: transform 0.2s;
+}
+.project-image img:hover {
+    transform: scale(1.03) rotate(-2deg);
+}
+/* Bottom right GitHub logo */
+.github-fab {
+    position: fixed;
+    right: 32px;
+    bottom: 32px;
+    z-index: 100;
+    font-size: 2.5rem;
+    color: #00c6fb;
+    background: rgba(17,17,17,0.7);
+    border-radius: 50%;
+    padding: 14px 16px 10px 16px;
+    box-shadow: 0 0 18px #00c6fb44;
+    transition: color 0.2s, box-shadow 0.2s, background 0.2s;
+    text-align: center;
+    display: inline-block;
+}
+.github-fab:hover {
+    color: #fff;
+    background: #00c6fb;
+    box-shadow: 0 0 32px #00c6fb99;
+}
+
+/* Bottom video styles */
+.bottom-video-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+.bottom-video {
+    max-width: 700px;
+    width: 90vw;
+    border-radius: 18px;
+    box-shadow: 0 0 24px #00c6fb55;
+}
+
+@media (max-width: 900px) {
+    .project-container {
+        padding: 1.5rem 0.5rem;
+    }
+    .project-section,
+    .project-section.reverse {
+        flex-direction: column !important;
+        gap: 1.5rem;
+    }
+    .project-title {
+        font-size: 1.7rem;
+        text-align: center;
+    }
+    .project-image img {
+        width: 100%;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+@media (max-width: 600px) {
+    .project-container {
+        margin: 1.5rem 0.2rem;
+        padding: 1rem 0.2rem;
+    }
+    .project-title {
+        font-size: 1.2rem;
+    }
+}
